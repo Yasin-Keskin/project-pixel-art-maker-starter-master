@@ -1,29 +1,44 @@
 
 // Select color input
 // Select size input
-
 // When size is submitted by the user, call makeGrid()
 
 let submitGrid = document.getElementById('submitButton');
+let color = document.getElementById('colorPicker');
+
+submitGrid.addEventListener('click', function (e) {
+
+    e.preventDefault();
+    makeGrid();
+
+});
 
 function makeGrid() {
-
-// Your code goes here!
-    let canvasHeight = document.getElementById('inputHeight').nodeValue;
-    console.log(canvasHeight)
-    let canvasWidth = document.getElementById('inputWidth').nodeValue;
-    console.log(canvasWidth)
+    // Your code goes here!
+    let canvasHeight = document.getElementById('inputHeight').value;
+    console.log(canvasHeight);
+    let canvasWidth = document.getElementById('inputWidth').value;
+    console.log(canvasWidth);
     var gridTable = document.getElementById('pixelCanvas');
+    gridTable.innerHTML = "";
 
-    for (let i = 0; i < canvasHeight; i++){
+    for (let i = 0; i < canvasHeight; i++) {
 
-        let newRow = document.createElement('tr');
-        gridTable.appendChild(newRow);
+        // let newRow = gridTable.appendChild(document.createElement('tr'));
+        // gridTable.appendChild(newRow);
 
-        for(let j = 0; j < canvasWidth; j++){
+        let newRow = gridTable.insertRow(i);
 
-            let newCell = document.createElement('td');
-            gridTable[i].appendChild(newCell);
+        for (let j = 0; j < canvasWidth; j++) {
+
+            // let newCell = newRow.appendChild(document.createElement('td'));
+            // gridTable[i].appendChild(newCell);
+
+            let newCell = newRow.insertCell(j);
+            newCell.addEventListener('click', function(){
+                // e.preventDefault();
+                newCell.style.backgroundColor = color.value;
+            });
 
         }
 
@@ -31,4 +46,3 @@ function makeGrid() {
 
 }
 
-submitGrid.addEventListener('click', makeGrid);
